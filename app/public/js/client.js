@@ -24,11 +24,21 @@ new Vue({
         alert('filename 只能包含数字，字母，横线（-）');
         return;
       }
-      exec('cd blog && hexo new ' + name, function(err, stdout, stderr) {
-        if (err) throw err;
-        that.log += stdout;
-        that.openFile('../hexo-client/blog/source/_posts/'+ name+'.md');
+
+      var path = '../hexo-client/blog/source/_posts/'+ name+'.md';
+      var exit = true;
+      fs.readFile(path, 'utf8', function (err,data) {
+        if (err) {
+          exec('cd blog && hexo new ' + name, function(err, stdout, stderr) {
+            if (err) throw err;
+            that.log += stdout;
+            that.openFile(path);
+          });
+        }else {
+          that.openFile(path);
+        }
       });
+
     },
     setting: function() {
       this.openFile('../hexo-client/blog/_config.yml');
