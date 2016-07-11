@@ -7,11 +7,12 @@ new Vue({
     log: 'Hello Vue.js!',
     fileName: '',
     content: '',
+    previewUrl: 'http://hanks.xyz',
   },
   methods:{
     init: function() {
       var that = this;
-      exec('mkdir blog && cd blog && hexo init', function(err, stdout, stderr) {
+      exec('mkdir blog && cd blog && hexo init && npm install', function(err, stdout, stderr) {
         if (err) throw err;
         that.log += stdout;
       });
@@ -62,9 +63,11 @@ new Vue({
       });
     },
     preview: function() {
-      exec('cd blog && hexo s -o', function(err, stdout, stderr) {
+      var that = this;
+      exec('cd blog && hexo server', function(err, stdout, stderr) {
         if (err) throw err;
         that.log += stdout;
+        that.previewUrl = 'http://0.0.0.0:4000';
       });
     },
 
