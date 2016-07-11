@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+</head>
 
-    <input type="button" value="hexo init" onclick="init()"/>
-  </body>
+<body>
+    <h1>Hello World!</h1> We are using node
+    <script>
+        document.write(process.versions.node)
+    </script>, Chrome
+    <script>
+        document.write(process.versions.chrome)
+    </script>, and Electron
+    <script>
+        document.write(process.versions.electron)
+    </script>.
 
-   <script src="./app/public/js/client.js" charset="utf-8"></script>
+    <div id="app">
+        <input type="button" value="hexo init" v-on:click="init" />
+        <input v-model="fileName" v-on:keyup.enter="new">
+        <input type="button" value="hexo new post" v-on:click="new" />
+        <input type="button" value="preview" v-on:click="preview" />
+        <div class="log">
+            {{ log }}
+        </div>
+        <textarea  v-model="content"  class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+        <input type="button" value="save" v-on:click="saveFile" />
+    </div>
+
+</body>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js" charset="utf-8"></script>
+<script src="./app/public/js/client.js" charset="utf-8"></script>
+
 </html>
