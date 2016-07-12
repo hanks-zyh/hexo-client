@@ -10,6 +10,8 @@
         <input v-model="fileName" v-on:keyup.enter="new">
         <input type="button" value="hexo new post" v-on:click="new" />
         <input type="button" value="preview" v-on:click="preview" />
+        <input type="button" value="stop" v-on:click="stop" />
+        <input type="button" value="setting" v-on:click="setting" />
         <div class="log">
             {{ log }}
         </div>

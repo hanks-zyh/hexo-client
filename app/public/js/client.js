@@ -64,12 +64,18 @@ new Vue({
     },
     preview: function() {
       var that = this;
-      exec('cd blog && hexo server', function(err, stdout, stderr) {
+      exec('cd ../hexo-client/blog/ && hexo server', function(err, stdout, stderr) {
         if (err) throw err;
         that.log += stdout;
-        that.previewUrl = 'http://0.0.0.0:4000';
+        that.previewUrl = 'http://localhost:4000/';
       });
     },
+
+    stop: function() {
+      var that = this;
+      exec.kill();
+    },
+
 
   }
 });

@@ -1,8 +1,8 @@
 {
-  "name":"hexo-client",
-  "version":"0.1.0",
-  "main":"main.js",
+  "name": "hexo-client",
+  "version": "0.1.0",
+  "main": "main.js",
   "dependencies": {
-    "hexo-cli": "^1.0.2"
+    "shelljs": "^0.7.0"
   }
 }
