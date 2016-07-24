@@ -1,5 +1,6 @@
 var exec = require('child_process').exec;
-fs = require('fs');
+var fs = require('fs');
+var shell = require('shelljs');
 
 new Vue({
   el: '#app',
@@ -10,13 +11,15 @@ new Vue({
     previewUrl: 'http://hanks.xyz',
   },
   methods:{
+
     init: function() {
       var that = this;
-      exec('mkdir blog && cd blog && hexo init && npm install', function(err, stdout, stderr) {
+      shell.exec('mkdir blog && cd blog && hexo init && npm install', function(err, stdout, stderr) {
         if (err) throw err;
         that.log += stdout;
       });
     },
+
     new: function() {
       var that = this;
       var name = that.fileName.trim();
@@ -30,7 +33,7 @@ new Vue({
       var exit = true;
       fs.readFile(path, 'utf8', function (err,data) {
         if (err) {
-          exec('cd blog && hexo new ' + name, function(err, stdout, stderr) {
+          shell.exec('cd blog && hexo new ' + name, function(err, stdout, stderr) {
             if (err) throw err;
             that.log += stdout;
             that.openFile(path);
@@ -64,11 +67,16 @@ new Vue({
     },
     preview: function() {
       var that = this;
-      exec('cd blog && hexo server', function(err, stdout, stderr) {
+      shell.exec('cd blog && hexo server', function(err, stdout, stderr) {
         if (err) throw err;
         that.log += stdout;
-        that.previewUrl = 'http://0.0.0.0:4000';
+        that.previewUrl = 'http://localhost:4000/';
       });
+    },
+
+    stop: function() {
+      var that = this;
+      shell.kill();
     },
 
   }
